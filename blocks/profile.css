@@ -16,8 +16,8 @@
 }
 
 .profile__edit-button {
-    background: transparent url(../images/Edit\ Button\ Inactive.svg) center no-repeat;
-    margin-top: 20px;
+    background: transparent url(../images/edit\ button.svg) center no-repeat;
+    background-size: 7.5px;
     height: 24px;
     width: 24px;
     grid-area: button;
@@ -31,7 +31,8 @@
 }
 
 .profile__add-button {
-    background: transparent url(../images/Add\ Button\ inactive.svg) center no-repeat;
+    background: transparent url(../images/add\ button.svg) center no-repeat;
+    background-size: 16px;
     height: 50px;
     width: 150px;
     margin-left: auto;
@@ -47,6 +48,7 @@
 
 .profile__title {
     max-width: 373px;
+    padding-bottom: 7px;
     font-family: 'Inter', Arial, sans-serif;
     font-size: 42px;
     font-weight: 500;
@@ -74,6 +76,8 @@
 .profile__image {
     height: 120px;
     width: 120px;
+    object-fit: cover;
+    object-position: 50% 50%;
     border-radius: 50%;
     margin-right: 25px;
 }
