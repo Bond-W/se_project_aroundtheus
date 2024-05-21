@@ -17,7 +17,6 @@
 
 .profile__edit-button {
     background: transparent url(../images/edit\ button.svg) center no-repeat;
-    background-size: 7.5px;
     height: 24px;
     width: 24px;
     grid-area: button;
@@ -25,6 +24,7 @@
     border-color: #fff;
     border-style: solid;
     cursor: pointer;
+    transition: ease-out;
 }
 
 .profile__edit-button:hover {
@@ -33,7 +33,6 @@
 
 .profile__add-button {
     background: transparent url(../images/add\ button.svg) center no-repeat;
-    background-size: 16px;
     height: 50px;
     width: 150px;
     margin-left: auto;
@@ -42,6 +41,7 @@
     border-color: #fff;
     border-style: solid;
     cursor: pointer;
+    transition: ease-out;
 }
 
 .profile__add-button:hover {
@@ -87,6 +87,8 @@
 @media screen and (max-width:500px) {
     .profile {
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .profile__image {
@@ -104,18 +106,20 @@
         font-size: 22px;
         line-height: 1.2;
         text-align: center;
-        min-width: 196px;
+        max-width: 196px;
+        padding-bottom: 0;
     }
 
     .profile__description {
         font-size: 14px;
         line-height: 1.2;
         text-align: center;
-        width: 282px;
+        max-width: 282px;
         margin: 14px auto 0;
     }
 
     .profile__edit-button {
+        background-size: 7.5px;
         width: 18px;
         height: 18px;
         margin: 3px 0 0 10px;
@@ -123,6 +127,7 @@
     }
 
     .profile__add-button {
+        background-size: 16px;
         margin: 0 auto;
         width: 282px;
     }
