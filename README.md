@@ -4,6 +4,8 @@ Around The U.S.
 * Figma  
 * Images  
 
+Project Link https://bond-w.github.io/se_project_aroundtheus/
+
 Project Video https://youtu.be/gasCAy2Ttsg
 
 What I Learned
