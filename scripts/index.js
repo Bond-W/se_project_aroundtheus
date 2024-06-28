@@ -32,7 +32,7 @@ const cardTemplate = document.querySelector("#card-template").content.querySelec
 /* -------------------------------------------------------------------------- */
 
 const cardsWrap = document.querySelector(".cards__list");
-const modal = document.querySelector(".modal");
+const editProfileModal = document.querySelector("#edit-profile-modal");
 const profileFormElement = document.querySelector(".modal__form");
 
 /* -------------------------------------------------------------------------- */
@@ -52,14 +52,14 @@ const nameInput = document.querySelector("#profile-name-input");
 const jobInput = document.querySelector("#profile-description-input");
 
 function closeProfileModal () {
-    modal.classList.remove("modal_opened");
+    editProfileModal.classList.remove("modal_opened");
 };
 
 function openProfileModal() {
     nameInput.value = profileName.textContent;
     jobInput.value = profileDescription.textContent;
 
-    modal.classList.add("modal_opened");
+    editProfileModal.classList.add("modal_opened");
 }
 
 function handleProfileFormSubmit(e) {

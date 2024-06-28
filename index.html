@@ -32,31 +32,57 @@
             <footer class="footer page__section">
                 <p class="footer__copyright">&#169; 2024 Around The U.S.</p>
             </footer>
-        </div>
+            <!-- edit modal -->
+            <div class="modal" id="edit-profile-modal">
+                <div class="modal__container">
+                    <button class="modal__close"></button>
+                    <h2 class="modal__heading">Edit Profile</h2>
+                    <form class="modal__form" id="edit-profile-form">
+                        <input 
+                        type="text" 
+                        name="name" 
+                        id="profile-name-input" 
+                        class="modal__input modal__input-type-name" 
+                        placeholder="Name" 
+                        required
+                        />
+                        <input 
+                        type="text" 
+                        name="description" 
+                        id="profile-description-input" 
+                        class="modal__input modal__input-type-description" 
+                        placeholder="Description"
+                        />
+                        <button class="modal__button" type="submit">Save</button>
+                    </form>
+                </div>
+            </div>
 
-        <div class="modal" id="profile-edit-modal">
-            <div class="modal__container">
-                <button class="modal__close"></button>
-                <h2 class="modal__heading">Edit Profile</h2>
-                <form class="modal__form">
-                    <input 
-                    type="text" 
-                    name="name" 
-                    id="profile-name-input" 
-                    class="modal__input modal__input-type-name" 
-                    placeholder="Name" 
-                    required
-                    />
-                    <input 
-                    type="text" 
-                    name="description" 
-                    id="profile-description-input" 
-                    class="modal__input modal__input-type-description" 
-                    placeholder="Description"
-                    />
-                    <button class="modal__button" type="submit">Save</button>
-
-                </form>
+            <!-- add card modal -->
+            <div class="modal" id="add-card-modal">
+                <div class="modal__container">
+                    <button class="modal__close"></button>
+                    <h2 class="modal__heading">New Place</h2>
+                    <form class="modal__form" id="add-card-form">
+                        <input 
+                        type="text" 
+                        name="title" 
+                        id="profile-name-input" 
+                        class="modal__input modal__input-type-title" 
+                        placeholder="Title" 
+                        required
+                        />
+                        <input 
+                        type="text" 
+                        name="url" 
+                        id="card-image-input" 
+                        class="modal__input modal__input-type-url" 
+                        placeholder="Image URL"
+                        required
+                        />
+                        <button class="modal__button" type="submit">Save</button>
+                    </form>
+                </div>
             </div>
         </div>
 
