@@ -4,6 +4,8 @@
     border-radius: 10px;
     background-color: #fff;
     overflow: hidden;
+    position: relative;
+    cursor: pointer;
 }
 
 .card__image {
@@ -34,7 +36,7 @@
 }
 
 .card__like-button {
-    background: transparent url(../images/Heart\ Icon\ Inactive.svg) center no-repeat;
+    background: transparent url("../images/Heart\ Icon\ Inactive.svg") center no-repeat;
     width: 20px;
     height: 18px;
     border: none;
@@ -42,6 +44,32 @@
     cursor: pointer;
 }
 
+.card__like-button_active {
+    background-image: url("../images/Heartt\ Icon\ Active.svg");
+}
+
 .card__like-button:hover {
     opacity: 50%;
+    transform: scale(1.1);
+    transition: transform 0.3s ease-out;
+}
+
+
+.card__delete-button {
+    background: transparent url("../images/TrashCan.svg") center no-repeat;
+    width: 18px;
+    height: 20px;
+    transition: all 1s ease-out;
+    cursor: pointer;
+    position: absolute;
+    border: none;
+    padding: 0;
+    top: 18px;
+    right: 15px;
+}
+
+.card__delete-button:hover {
+    opacity: 50%;
+    transform: scale(1.1);
+    transition: transform 0.3s ease-out;
 }
