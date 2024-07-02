@@ -113,8 +113,8 @@ function getCardElement(cardData) {
 }
 
 function openImagePreview(imageSrc, imageAlt) {
-    const modalImagePreview = document.querySelector(".modal__image-preview");
-    const modalCaption = document.querySelector(".modal__caption");
+    const modalImagePreview = document.querySelector(".modal__preview-image");
+    const modalCaption = document.querySelector(".modal__preview-caption");
 
     modalImagePreview.src = imageSrc;
     modalImagePreview.alt = imageAlt;
@@ -125,9 +125,13 @@ function openImagePreview(imageSrc, imageAlt) {
 
 previewCloseButton.addEventListener("click", () => {
     closeModal(modalPreview);
-})
+});
 
-
+window.addEventListener("click", (e) => {
+    if (e.target === modalPreview) {
+        closeModal(modalPreview);
+    }
+});
 
 function renderCard(cardData, wrapper) {
    const cardEl = getCardElement(cardData);
