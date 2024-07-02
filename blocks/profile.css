@@ -90,7 +90,7 @@
     }
 }
 
-@media screen and (max-width:500px) {
+@media screen and (max-width:500px) and (min-width:320px) {
     .profile {
         flex-direction: column;
         justify-content: center;
@@ -108,7 +108,7 @@
         justify-content: center;
     }
 
-    .profile__title {
+    .profile__name {
         font-size: 22px;
         line-height: 1.2;
         text-align: center;
