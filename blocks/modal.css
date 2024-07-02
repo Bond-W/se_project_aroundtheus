@@ -113,10 +113,6 @@
     opacity: 0.8;
 }
 
-.modal__preview {
-    cursor: pointer;
-}
-
 .modal__preview-image {
 max-width: 816px;
 max-height: 540px;
