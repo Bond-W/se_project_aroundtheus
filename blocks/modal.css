@@ -147,6 +147,7 @@ transition: opacity 0.5s ease, transform 0.5s ease;
       margin-left: 22px;
       margin-right: 22px;
       margin-bottom: 25px;
+      margin-top: 16px;
       font-size: 14px;
     }
   
@@ -170,6 +171,7 @@ transition: opacity 0.5s ease, transform 0.5s ease;
       max-width: 238px;
       margin-left: 22px;
       margin-top: 25px;
+      margin-bottom: 76px;
     }
   
     .modal__preview-image {
