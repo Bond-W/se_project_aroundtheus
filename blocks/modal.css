@@ -13,6 +13,7 @@
     visibility: hidden;
     opacity: 0;
     transition: visibility 0.3s ease, opacity 0.3s ease;
+    font-family: "Inter", Arial, sans-serif;
 }
 
 .modal_opened {
@@ -160,7 +161,7 @@ transition: opacity 0.5s ease, transform 0.5s ease;
       width: 26px;
       height: 26px;
       top: -45px;
-      right: 0;
+      left: calc(100% - 26px);
     }
   
     .modal__heading {
@@ -176,8 +177,9 @@ transition: opacity 0.5s ease, transform 0.5s ease;
       width: 240px;
     }
   
-    .modal__close {
-      height: 33px; /* fix class name */
-      width: 33px;
+    .modal__close-preview {
+      height: 30px; 
+      width: 30px;
+      left: calc(100% + 3px);
     }
 }
