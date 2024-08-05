@@ -38,23 +38,34 @@
                 <div class="modal__container">
                     <button class="modal__close" id="profile-edit-modal-close-button"></button>
                     <h2 class="modal__heading">Edit Profile</h2>
-                    <form class="modal__form" id="edit-profile-form">
+                    <form class="modal__form js-modal-form" id="edit-profile-form">
+                        <label class="modal__label">
                         <input 
                         type="text" 
                         name="name" 
-                        id="profile-name-input" 
+                        id="profile-name" 
                         class="modal__input modal__input-type-name" 
                         placeholder="Name" 
+                        minlength="2"
+                        max="40"
                         required
                         />
+                        <span class="modal__error" id="profile-name-error"></span>
+                    </label>
+                        <label class="modal__label">
                         <input 
                         type="text" 
                         name="description" 
-                        id="profile-description-input" 
+                        id="profile-description" 
                         class="modal__input modal__input-type-description" 
                         placeholder="Description"
+                        minlength="2"
+                        maxlength="200"
+                        required
                         />
-                        <button class="modal__button" type="submit">Save</button>
+                        <span class="modal__error" id="profile-description-error"></span>
+                    </label>
+                        <button class="modal__button modal__button-disabled" type="submit" disabled>Save</button>
                     </form>
                 </div>
             </div>
@@ -64,28 +75,36 @@
                 <div class="modal__container">
                     <button class="modal__close" id="add-modal-close-button"></button>
                     <h2 class="modal__heading">New Place</h2>
-                    <form class="modal__form" id="add-card-form">
+                    <form class="modal__form js-modal-form" id="add-card-form">
+                        <label class="modal__label">
                         <input 
                         type="text" 
                         name="title" 
-                        id="card-name-input" 
+                        id="card-name" 
                         class="modal__input modal__input-type-title" 
-                        placeholder="Title" 
+                        placeholder="Title"
+                        minlength="1" 
+                        maxlength="30"
                         required
                         />
-                        <input 
-                        type="text" 
-                        name="url" 
-                        id="card-image-input" 
+                        <span class="modal__error" id="card-name-error">Please fill out this field.</span>
+                    </label>
+                    <label class="modal__label">
+                    <input 
+                    type="text" 
+                    name="url" 
+                        id="card-image" 
                         class="modal__input modal__input-type-url" 
                         placeholder="Image URL"
                         required
                         />
-                        <button class="modal__button" type="submit">Create</button>
+                        <span class="modal__error" id="card-image-error">Please enter a web address.</span>
+                    </label>
+                        <button class="modal__button modal__button-disabled" type="submit" disabled>Create</button>
                     </form>
                 </div>
             </div>
-            
+
             <!-- preview card -->
             <div class="modal modal-preview" id="preview-card-modal">
                 <div class="modal__content modal__content-type-preview">
@@ -110,5 +129,6 @@
         </template>
 
         <script src="./scripts/index.js" defer></script>
+        <script src="./scripts/validation.js" defer></script>
     </body>
 </html>

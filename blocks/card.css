@@ -3,6 +3,7 @@
     flex-direction: column;
     border-radius: 10px;
     background-color: #fff;
+    /* list-style-type: none; */
     overflow: hidden;
     position: relative;
     cursor: pointer;

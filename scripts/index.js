@@ -47,8 +47,8 @@ const profileModalCloseButton = editProfileModal.querySelector(
 const profileEditForm = document.forms["edit-profile-form"];
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
-const nameInput = document.querySelector("#profile-name-input");
-const jobInput = document.querySelector("#profile-description-input");
+const nameInput = document.querySelector("#profile-name");
+const jobInput = document.querySelector("#profile-description");
 
 /* -------------------------------------------------------------------------- */
 /*                                  Add card                                  */
@@ -61,11 +61,11 @@ const addCardModalCloseButton = addCardModal.querySelector(
   "#add-modal-close-button"
 );
 
-const cardNameInput = document.querySelector("#card-name-input");
-const cardUrlInput = document.querySelector("#card-image-input");
+const cardNameInput = document.querySelector("#card-name");
+const cardUrlInput = document.querySelector("#card-image");
 
-const cardTitleInput = addCardForm.querySelector("#card-name-input");
-const urlInput = addCardForm.querySelector("#card-image-input");
+const cardTitleInput = addCardForm.querySelector("#card-name");
+const urlInput = addCardForm.querySelector("#card-image");
 
 /* -------------------------------------------------------------------------- */
 /*                                   part 2                                   */
