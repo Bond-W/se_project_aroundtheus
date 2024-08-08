@@ -12,7 +12,7 @@ IN this project I used several different languages (JavaScript, HTML, and CSS) t
 
 Figma
 
-[link to figma] (https://www.figma.com/design/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0-1&t=SyPk4MI0Tyw5XZVc-0)
+[Link to the Figma](https://www.figma.com/design/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0-1&t=SO8lTDM3n8QnIZLT-0)
 
 GitHub
 

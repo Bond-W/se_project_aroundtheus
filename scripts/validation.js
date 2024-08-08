@@ -9,11 +9,11 @@ function showInputError(formEl, inputEl, {inputErrorClass, errorClass}) {
   errorMessageEl.textContent = inputEl.validationMessage;
   errorMessageEl.classList.add(errorClass);
 } else {
-    console.error(`Error element not found for ${inputEl.id}`);
+    console.error(`Error element found for ${inputEl.id}`);
 }
 }
 
-function hideInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
+function hideInputError(formEl, inputEl, {inputErrorClass, errorClass}) {
   const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
   console.log(`Hiding error for ${inputEl.id}`);
   if (errorMessageEl) {
@@ -29,9 +29,9 @@ function checkInputValidity(formEl, inputEl, options) {
     console.log(`Checking validity for ${inputEl.id}`);
   if (!inputEl.validity.valid) {
     return showInputError(formEl, inputEl, options);
-  }
-
+  }else {
   hideInputError(formEl, inputEl, options);
+  }
 }
 
 function hasInvalidInput(inputList) {
@@ -80,7 +80,7 @@ const config = {
   submitButtonSelector: ".modal__button",
   inactiveButtonClass: "modal__button-disabled",
   inputErrorClass: "modal__input-type-error",
-  errorClass: "modal__error_visible",
+  errorClass: "modal__error-visible",
 };
 
 enableValidation(config);

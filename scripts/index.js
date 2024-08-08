@@ -82,10 +82,27 @@ const previewCloseButton = modalPreview.querySelector(
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", handleEscKeyPress);
 }
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", handleEscKeyPress);
+}
+
+function handleEscKeyPress(event) {
+  if (event.key === "Escape") {
+    const openedModal = document.querySelector(".modal_opened");
+    if (openedModal) {
+      closeModal(openedModal);
+    }
+  }
+}
+
+function handleOverlayClick(e) {
+  if (e.target.classList.contains("modal")) {
+    closeModal(e.target);
+  }
 }
 
 function getCardElement(cardData) {
@@ -124,10 +141,6 @@ function openImagePreview(imageSrc, imageAlt) {
 
   openModal(modalPreview);
 }
-
-previewCloseButton.addEventListener("click", () => {
-  closeModal(modalPreview);
-});
 
 function renderCard(cardData, wrapper) {
   const cardEl = getCardElement(cardData);
@@ -175,6 +188,14 @@ profileModalCloseButton.addEventListener("click", () =>
 addCardModalCloseButton.addEventListener("click", () =>
   closeModal(addCardModal)
 );
+
+previewCloseButton.addEventListener("click", () => {
+  closeModal(modalPreview);
+});
+
+document.querySelectorAll(".modal").forEach(modal => {
+  modal.addEventListener("mousedown", handleOverlayClick);
+});
 
 initialCards.forEach((cardData) => {
   renderCard(cardData, cardsWrap);
