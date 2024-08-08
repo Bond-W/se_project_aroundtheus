@@ -1,8 +1,20 @@
 Around The U.S.
 
+Overview
+
 * Intro  
-* Figma  
-* Images  
+* Figma   
+* GitHub
+
+Intro
+
+IN this project I used several different languages (JavaScript, HTML, and CSS) to create a functioning landing page for users to share their photos they have taken from all around the USA primarily focusing on national parks or hidden gems. All buttons are fully functional and media queries have been added so it can be enjoyed on all devices.
+
+Figma
+
+[link to figma] (https://www.figma.com/design/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0-1&t=SyPk4MI0Tyw5XZVc-0)
+
+GitHub
 
 Project Link https://bond-w.github.io/se_project_aroundtheus/
 
