@@ -8,7 +8,7 @@ Overview
 
 Intro
 
-IN this project I used several different languages (JavaScript, HTML, and CSS) to create a functioning landing page for users to share their photos they have taken from all around the USA primarily focusing on national parks or hidden gems. All buttons are fully functional and media queries have been added so it can be enjoyed on all devices.
+In this project I used several different languages (JavaScript, HTML, and CSS) to create a functioning landing page for users to share their photos they have taken from all around the USA primarily focusing on national parks or hidden gems. All buttons are fully functional and media queries have been added so it can be enjoyed on all devices.
 
 Figma
 
@@ -16,9 +16,9 @@ Figma
 
 GitHub
 
-Project Link https://bond-w.github.io/se_project_aroundtheus/
+[Project Link](https://bond-w.github.io/se_project_aroundtheus/)
 
-Project Video https://youtu.be/gasCAy2Ttsg
+[Project Video](https://youtu.be/gasCAy2Ttsg)
 
 What I Learned
 

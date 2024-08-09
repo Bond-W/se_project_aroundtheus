@@ -29,13 +29,22 @@ function checkInputValidity(formEl, inputEl, options) {
     console.log(`Checking validity for ${inputEl.id}`);
   if (!inputEl.validity.valid) {
     return showInputError(formEl, inputEl, options);
-  }else {
+  } 
+
   hideInputError(formEl, inputEl, options);
-  }
+  
 }
 
 function hasInvalidInput(inputList) {
   return !inputList.every((inputEl) => inputEl.validity.valid);
+}
+
+function enableButton() {
+
+}
+
+function disableButton() {
+    
 }
 
 function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
@@ -46,6 +55,7 @@ function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
     submitButton.disabled = true;
     return;
   }
+
   console.log('Enabling button')
   submitButton.classList.remove(inactiveButtonClass);
   submitButton.disabled = false;
@@ -80,7 +90,7 @@ const config = {
   submitButtonSelector: ".modal__button",
   inactiveButtonClass: "modal__button-disabled",
   inputErrorClass: "modal__input-type-error",
-  errorClass: "modal__error-visible",
+  errorClass: "modal__error_visible",
 };
 
 enableValidation(config);
