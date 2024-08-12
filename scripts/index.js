@@ -193,7 +193,7 @@ previewCloseButton.addEventListener("click", () => {
   closeModal(modalPreview);
 });
 
-document.querySelectorAll(".modal").forEach(modal => {
+document.querySelectorAll(".modal").forEach((modal) => {
   modal.addEventListener("mousedown", handleOverlayClick);
 });
 

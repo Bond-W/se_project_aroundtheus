@@ -1,76 +1,76 @@
 .card {
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-    background-color: #fff;
-    /* list-style-type: none; */
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: #fff;
+  /* list-style-type: none; */
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
 }
 
 .card__image {
-    width: 282px;
-    height: 282px;
-    object-fit: cover;
-    margin: 0;
+  width: 282px;
+  height: 282px;
+  object-fit: cover;
+  margin: 0;
 }
 
 .card__description {
-    display: flex;
-    padding: 25px 20px;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  padding: 25px 20px;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .card__name {
-    max-width: 219px;
-    font-weight: 900;
-    font-family: 'Inter', Arial, sans-serif;
-    font-size: 24px;
-    line-height: 1.2;
-    margin: 0;
-    color: #000;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+  max-width: 219px;
+  font-weight: 900;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 24px;
+  line-height: 1.2;
+  margin: 0;
+  color: #000;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .card__like-button {
-    background: transparent url("../images/Heart\ Icon\ Inactive.svg") center no-repeat;
-    width: 20px;
-    height: 18px;
-    border: none;
-    transition: all 1s ease-out;
-    cursor: pointer;
+  background: transparent url("../images/Heart\ Icon\ Inactive.svg") center
+    no-repeat;
+  width: 20px;
+  height: 18px;
+  border: none;
+  transition: all 1s ease-out;
+  cursor: pointer;
 }
 
 .card__like-button_active {
-    background-image: url("../images/Heartt\ Icon\ Active.svg");
+  background-image: url("../images/Heartt\ Icon\ Active.svg");
 }
 
 .card__like-button:hover {
-    opacity: 50%;
-    transform: scale(1.1);
-    transition: transform 0.3s ease-out;
+  opacity: 50%;
+  transform: scale(1.1);
+  transition: transform 0.3s ease-out;
 }
 
-
 .card__delete-button {
-    background: transparent url("../images/TrashCan.svg") center no-repeat;
-    width: 18px;
-    height: 20px;
-    transition: all 1s ease-out;
-    cursor: pointer;
-    position: absolute;
-    border: none;
-    padding: 0;
-    top: 18px;
-    right: 15px;
+  background: transparent url("../images/TrashCan.svg") center no-repeat;
+  width: 18px;
+  height: 20px;
+  transition: all 1s ease-out;
+  cursor: pointer;
+  position: absolute;
+  border: none;
+  padding: 0;
+  top: 18px;
+  right: 15px;
 }
 
 .card__delete-button:hover {
-    opacity: 50%;
-    transform: scale(1.1);
-    transition: transform 0.3s ease-out;
+  opacity: 50%;
+  transform: scale(1.1);
+  transition: transform 0.3s ease-out;
 }

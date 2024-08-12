@@ -1,38 +1,34 @@
-// enabling validation by calling enableValidation()
-// pass all the settings on call
-
-function showInputError(formEl, inputEl, {inputErrorClass, errorClass}) {
+function showInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
   const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
   console.log(`showing error for ${inputEl.id}`);
   if (errorMessageEl) {
     inputEl.classList.add(inputErrorClass);
-  errorMessageEl.textContent = inputEl.validationMessage;
-  errorMessageEl.classList.add(errorClass);
-} else {
+    errorMessageEl.textContent = inputEl.validationMessage;
+    errorMessageEl.classList.add(errorClass);
+  } else {
     console.error(`Error element found for ${inputEl.id}`);
-}
+  }
 }
 
-function hideInputError(formEl, inputEl, {inputErrorClass, errorClass}) {
+function hideInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
   const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
   console.log(`Hiding error for ${inputEl.id}`);
   if (errorMessageEl) {
-  inputEl.classList.remove(inputErrorClass);
-  errorMessageEl.textContent = "";
-  errorMessageEl.classList.remove(errorClass);
+    inputEl.classList.remove(inputErrorClass);
+    errorMessageEl.textContent = "";
+    errorMessageEl.classList.remove(errorClass);
   } else {
     console.error(`Error element not found for ${inputEl.id}`);
   }
 }
 
 function checkInputValidity(formEl, inputEl, options) {
-    console.log(`Checking validity for ${inputEl.id}`);
+  console.log(`Checking validity for ${inputEl.id}`);
   if (!inputEl.validity.valid) {
     return showInputError(formEl, inputEl, options);
-  } 
+  }
 
   hideInputError(formEl, inputEl, options);
-  
 }
 
 function hasInvalidInput(inputList) {
@@ -40,15 +36,15 @@ function hasInvalidInput(inputList) {
 }
 
 function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
-    console.log('Checking button state');
+  console.log("Checking button state");
   if (hasInvalidInput(inputEls)) {
-    console.log('Disabling button');
+    console.log("Disabling button");
     submitButton.classList.add(inactiveButtonClass);
     submitButton.disabled = true;
     return;
   }
 
-  console.log('Enabling button')
+  console.log("Enabling button");
   submitButton.classList.remove(inactiveButtonClass);
   submitButton.disabled = false;
 }
@@ -59,7 +55,7 @@ function setEventListeners(formEl, options) {
   const submitButton = formEl.querySelector(submitButtonSelector);
   inputEls.forEach((inputEl) => {
     inputEl.addEventListener("input", (e) => {
-        console.log(`Input event on ${inputEl.id}`);
+      console.log(`Input event on ${inputEl.id}`);
       checkInputValidity(formEl, inputEl, options);
       toggleButtonState(inputEls, submitButton, options);
     });

@@ -1,22 +1,22 @@
-.header{
-    margin-top: 45px;
-    border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+.header {
+  margin-top: 45px;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 }
 
 .header__logo {
-    padding-bottom: 40px;
-    height: 33px;
+  padding-bottom: 40px;
+  height: 33px;
 }
 
 @media screen and (max-width: 340px) {
-    .header {
-        margin-top: 28px;
-    }
+  .header {
+    margin-top: 28px;
+  }
 
-    .header__logo {
-        max-width: 126px;
-        margin-left: 27px;
-        margin-bottom: 32px;
-        padding-bottom: 0;
-    }
+  .header__logo {
+    max-width: 126px;
+    margin-left: 27px;
+    margin-bottom: 32px;
+    padding-bottom: 0;
+  }
 }
