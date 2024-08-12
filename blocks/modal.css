@@ -146,8 +146,14 @@ transition: opacity 0.5s ease, transform 0.5s ease;
     margin-top: 10px;
 }
 
+.modal__label {
+  display: flex;
+  flex-direction: column;
+  width: 358px;
+}
+
 .modal__error {
-  width: 164px;
+  width: 100%;
   font-size: 12px;
   font-family: "Inter", Arial, sans-serif;
   font-weight: 400;
