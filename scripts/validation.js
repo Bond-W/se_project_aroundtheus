@@ -1,29 +1,18 @@
 function showInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
   const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
-  console.log(`showing error for ${inputEl.id}`);
-  if (errorMessageEl) {
     inputEl.classList.add(inputErrorClass);
     errorMessageEl.textContent = inputEl.validationMessage;
     errorMessageEl.classList.add(errorClass);
-  } else {
-    console.error(`Error element found for ${inputEl.id}`);
-  }
 }
 
 function hideInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
   const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
-  console.log(`Hiding error for ${inputEl.id}`);
-  if (errorMessageEl) {
     inputEl.classList.remove(inputErrorClass);
     errorMessageEl.textContent = "";
     errorMessageEl.classList.remove(errorClass);
-  } else {
-    console.error(`Error element not found for ${inputEl.id}`);
-  }
 }
 
 function checkInputValidity(formEl, inputEl, options) {
-  console.log(`Checking validity for ${inputEl.id}`);
   if (!inputEl.validity.valid) {
     return showInputError(formEl, inputEl, options);
   }
@@ -82,3 +71,7 @@ const config = {
 };
 
 enableValidation(config);
+
+
+const editFormValidator = new FormValidator(settings, editForm);
+const addFormValidator = new FormValidator(settings, addForm);
