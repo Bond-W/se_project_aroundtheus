@@ -1,4 +1,5 @@
-import Card from "./Card.js";
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
 
 const initialCards = [
   {
@@ -42,6 +43,11 @@ const cardTemplate = document
   .querySelector("#card-template")
   .content.querySelector(".card");
 
+
+
+
+const editFormValidator = new FormValidator(settings, editForm);
+const addFormValidator = new FormValidator(settings, addForm);
 /* -------------------------------------------------------------------------- */
 /*                                  Wrappers                                  */
 /* -------------------------------------------------------------------------- */
