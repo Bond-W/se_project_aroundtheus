@@ -147,6 +147,8 @@ function handleProfileFormSubmit(e) {
   profileName.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
   closeModal(editProfileModal);
+
+  formValidators[profileEditForm.getAttribute("name")].disableSubmitButton();
 }
 
 function handleAddCardFormSubmit(e) {
@@ -156,6 +158,8 @@ function handleAddCardFormSubmit(e) {
   renderCard({ name, link }, cardsWrap);
   closeModal(addCardModal);
   e.target.reset();
+
+  formValidators[addCardForm.getAttribute("name")].disableSubmitButton();
 }
 
 /* -------------------------------------------------------------------------- */
@@ -186,10 +190,6 @@ addCardModalCloseButton.addEventListener("click", () => {
 
 previewCloseButton.addEventListener("click", () => {
   closeModal(modalPreview);
-});
-
-document.querySelectorAll(".modal").forEach((modal) => {
-  modal.addEventListener("mousedown", handleOverlayClick);
 });
 
 initialCards.forEach((cardData) => {
