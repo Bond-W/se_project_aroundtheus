@@ -14,14 +14,13 @@
       content="US, Hiking, Photography, National Parks, Vacation"
     />
     <title>Around the U.S.</title>
-    <link href="./pages/index.css" rel="stylesheet" />
   </head>
   <body class="page">
     <div class="page__content">
       <header class="header page__section">
         <img
           class="header__logo"
-          src="./images/logo.svg"
+          src="<%=require('./images/logo.svg')%>"
           alt="Around the U.S. logo"
         />
       </header>
@@ -29,7 +28,7 @@
         <section class="profile page__section">
           <img
             class="profile__image"
-            src="./images/jacques-cousteau.jpg"
+            src="<%=require('./images/jacques-cousteau.jpg')%>"
             alt="Avatar"
           />
           <div class="profile__info">
@@ -164,7 +163,5 @@
         </div>
       </li>
     </template>
-
-    <script type= "module" src="./pages/index.js" defer></script>
   </body>
 </html>
