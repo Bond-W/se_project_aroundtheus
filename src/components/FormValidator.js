@@ -7,22 +7,28 @@ export default class FormValidator {
     this._errorClass = settings.errorClass;
 
     this._form = formElement;
-
+    if (!this._form) {
+      throw new Error('Invalid form element passed to FormValidator');
+    }
   }
   
   _hideInputError(inputEl) {
     const errorMessageEl = this._form.querySelector(`#${inputEl.id}-error`);
+    if (errorMessageEl) {
     inputEl.classList.remove(this._inputErrorClass);
     errorMessageEl.textContent = "";
     errorMessageEl.classList.remove(this._errorClass);
   }
+}
 
   _showInputError(inputEl) {
     const errorMessageEl = this._form.querySelector(`#${inputEl.id}-error`);
+    if (errorMessageEl) {
     inputEl.classList.add(this._inputErrorClass);
     errorMessageEl.textContent = inputEl.validationMessage;
     errorMessageEl.classList.add(this._errorClass);
   }
+}
 
   _hasInvalidInput() {
     return !this._inputEls.every((inputEl) => inputEl.validity.valid);
