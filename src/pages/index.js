@@ -7,7 +7,6 @@ import UserInfo from "../components/UserInfo.js";
 import { initialCards, settings } from "../utils/constants.js";
 import Section from "../components/Section.js";
 
-
 /* -------------------------------------------------------------------------- */
 /*                           Enable Form Validation                           */
 /* -------------------------------------------------------------------------- */
@@ -26,30 +25,52 @@ function enableValidation(config) {
 
 enableValidation(settings);
 
+const cardsWrap = document.querySelector(".cards__list");
+const nameInput = document.querySelector("#profile-name");
+const jobInput = document.querySelector("#profile-description");
+const profileEditButton = document.querySelector("#profile-edit-button");
 /* -------------------------------------------------------------------------- */
 /*                               Popup Instances                              */
 /* -------------------------------------------------------------------------- */
 
-const imagePopup = new PopupWithImage('#preview-card-modal');
+document.addEventListener('DOMContentLoaded', () => {
+const imagePopup = new PopupWithImage("#preview-card-modal");
 imagePopup.setEventListeners();
 
-const profileFormPopup = new PopupWithForm('#edit-profile-modal', handleProfileFormSubmit);
+const profileFormPopup = new PopupWithForm(
+  "#edit-profile-modal",
+  handleProfileFormSubmit
+);
 profileFormPopup.setEventListeners();
 
-const addCardFormPopup = new PopupWithForm('#add-card-modal', handleAddCardFormSubmit);
+const addCardFormPopup = new PopupWithForm(
+  "#add-card-modal",
+  handleAddCardFormSubmit
+);
 addCardFormPopup.setEventListeners();
-
-
-
 /* -------------------------------------------------------------------------- */
 /*                              User Information                              */
 /* -------------------------------------------------------------------------- */
 
 const userInfo = new UserInfo({
-  nameSelector: '.profile__name',
-  jobSelector: '.profile__description'
+  nameSelector: ".profile__name",
+  jobSelector: ".profile__description",
 });
 
+profileEditButton.addEventListener("click", () => {
+  const userData = userInfo.getUserInfo();
+  nameInput.value = userData.name;
+  jobInput.value = userData.job;
+  profileFormPopup.open();
+});
+
+document.querySelector("#add-button").addEventListener("click", () => {
+  addCardFormPopup.open();
+});
+
+
+
+});
 /* -------------------------------------------------------------------------- */
 /*                               Event Handlers                               */
 /* -------------------------------------------------------------------------- */
@@ -62,33 +83,19 @@ function handleProfileFormSubmit(formData) {
 }
 
 function handleAddCardFormSubmit(formData) {
-  renderCard({name: formData.title, link: formData.url }, cardsWrap);
+  renderCard({ name: formData.title, link: formData.url }, cardsWrap);
 }
 
 /* -------------------------------------------------------------------------- */
 /*                              DOM Elements                                  */
 /* -------------------------------------------------------------------------- */
 
-const cardsWrap = document.querySelector(".cards__list");
-const profileEditButton = document.querySelector("#profile-edit-button");
-const nameInput = document.querySelector("#profile-name");
-const jobInput = document.querySelector("#profile-description");
 
 /* -------------------------------------------------------------------------- */
 /*                              Modal Handling                                */
 /* -------------------------------------------------------------------------- */
 
-profileEditButton.addEventListener("click", () => {
-  const userData = userInfo.getUserInfo();
-  nameInput.value = userData.name;
-  jobInput.value = userData.job;
-  profileFormPopup.open();
-});
 
-const addNewCardButton = document.querySelector("#add-button");
-addNewCardButton.addEventListener("click", () => {
-  addCardFormPopup.open();
-});
 
 /* -------------------------------------------------------------------------- */
 /*                               Card Rendering                               */
@@ -177,9 +184,6 @@ function handleImageClick(name, link) {
 //   }
 // }
 
-
-
-
 // function handleProfileFormSubmit(e) {
 //   e.preventDefault();
 //   profileName.textContent = nameInput.value;
@@ -229,4 +233,3 @@ function handleImageClick(name, link) {
 // previewCloseButton.addEventListener("click", () => {
 //   closeModal(modalPreview);
 // });
-

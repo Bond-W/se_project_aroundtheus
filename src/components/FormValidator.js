@@ -8,27 +8,27 @@ export default class FormValidator {
 
     this._form = formElement;
     if (!this._form) {
-      throw new Error('Invalid form element passed to FormValidator');
+      throw new Error("Invalid form element passed to FormValidator");
     }
   }
-  
+
   _hideInputError(inputEl) {
     const errorMessageEl = this._form.querySelector(`#${inputEl.id}-error`);
     if (errorMessageEl) {
-    inputEl.classList.remove(this._inputErrorClass);
-    errorMessageEl.textContent = "";
-    errorMessageEl.classList.remove(this._errorClass);
+      inputEl.classList.remove(this._inputErrorClass);
+      errorMessageEl.textContent = "";
+      errorMessageEl.classList.remove(this._errorClass);
+    }
   }
-}
 
   _showInputError(inputEl) {
     const errorMessageEl = this._form.querySelector(`#${inputEl.id}-error`);
     if (errorMessageEl) {
-    inputEl.classList.add(this._inputErrorClass);
-    errorMessageEl.textContent = inputEl.validationMessage;
-    errorMessageEl.classList.add(this._errorClass);
+      inputEl.classList.add(this._inputErrorClass);
+      errorMessageEl.textContent = inputEl.validationMessage;
+      errorMessageEl.classList.add(this._errorClass);
+    }
   }
-}
 
   _hasInvalidInput() {
     return !this._inputEls.every((inputEl) => inputEl.validity.valid);
@@ -36,18 +36,17 @@ export default class FormValidator {
 
   _checkInputValidity(inputEl) {
     if (!inputEl.validity.valid) {
-        this._showInputError(inputEl);
-      } else {
+      this._showInputError(inputEl);
+    } else {
       this._hideInputError(inputEl);
     }
   }
-
 
   _toggleButtonState() {
     if (this._hasInvalidInput()) {
       this.disableSubmitButton();
     } else {
-    this.enableSubmitButton();
+      this.enableSubmitButton();
     }
   }
 
@@ -55,14 +54,16 @@ export default class FormValidator {
     this._submitButton.classList.remove(this._inactiveButtonClass);
     this._submitButton.disabled = false;
   }
-  
+
   disableSubmitButton() {
     this._submitButton.classList.add(this._inactiveButtonClass);
     this._submitButton.disabled = true;
   }
 
   _setEventListeners() {
-    this._inputEls = Array.from(this._form.querySelectorAll(this._inputSelector));
+    this._inputEls = Array.from(
+      this._form.querySelectorAll(this._inputSelector)
+    );
     this._submitButton = this._form.querySelector(this._submitButtonSelector);
 
     this._inputEls.forEach((inputEl) => {

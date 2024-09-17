@@ -5,7 +5,7 @@ export default class Card {
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
   }
-  
+
   _getTemplate() {
     const cardElement = document
       .querySelector(this._cardSelector)
@@ -27,9 +27,11 @@ export default class Card {
         this._handleDeleteCard();
       });
 
-      this._cardImageElement.addEventListener('click', () => {
+    if (this._cardImageElement) {
+      this._cardImageElement.addEventListener("click", () => {
         this._handleImageClick(this._name, this._link);
       });
+    }
   }
 
   _handleDeleteCard() {
@@ -45,8 +47,8 @@ export default class Card {
 
   generateCard() {
     this._cardEl = this._getTemplate();
-    this._cardEl.querySelector('.card__name').textContent = this._name;
-    this._cardImageElement = this._cardEl.querySelector('.card__image');
+    this._cardEl.querySelector(".card__name").textContent = this._name;
+    this._cardImageElement = this._cardEl.querySelector(".card__image");
     this._cardImageElement.src = this._link;
     this._cardImageElement.alt = this._name;
 
