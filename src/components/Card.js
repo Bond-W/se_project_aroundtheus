@@ -27,11 +27,12 @@ export default class Card {
         this._handleDeleteCard();
       });
 
-    if (this._cardImageElement) {
       this._cardImageElement.addEventListener("click", () => {
-        this._handleImageClick(this._name, this._link);
+        if (this._handleImageClick) {
+          this._handleImageClick(this._name, this._link);
+        }
       });
-    }
+    
   }
 
   _handleDeleteCard() {

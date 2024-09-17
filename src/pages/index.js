@@ -32,10 +32,17 @@ const profileEditButton = document.querySelector("#profile-edit-button");
 /* -------------------------------------------------------------------------- */
 /*                               Popup Instances                              */
 /* -------------------------------------------------------------------------- */
+let imagePopup;
 
-document.addEventListener('DOMContentLoaded', () => {
-const imagePopup = new PopupWithImage("#preview-card-modal");
-imagePopup.setEventListeners();
+
+  const previewCardModal = document.querySelector("#preview-card-modal");
+
+  if (!previewCardModal) {
+    console.error("Element with ID #preview-card-modal not found in the DOM");
+  } else {
+    imagePopup = new PopupWithImage("#preview-card-modal");
+    imagePopup.setEventListeners();
+  }
 
 const profileFormPopup = new PopupWithForm(
   "#edit-profile-modal",
@@ -51,6 +58,8 @@ addCardFormPopup.setEventListeners();
 /* -------------------------------------------------------------------------- */
 /*                              User Information                              */
 /* -------------------------------------------------------------------------- */
+
+// const card = new Card({ name, link }, "#card-template", handleImageClick);
 
 const userInfo = new UserInfo({
   nameSelector: ".profile__name",
@@ -69,8 +78,6 @@ document.querySelector("#add-button").addEventListener("click", () => {
 });
 
 
-
-});
 /* -------------------------------------------------------------------------- */
 /*                               Event Handlers                               */
 /* -------------------------------------------------------------------------- */
@@ -119,10 +126,14 @@ function createCard(cardData) {
   return card.generateCard();
 }
 
-// function renderCard(cardData, wrapper) {
-//   const cardEl = createCard(cardData);
-//   wrapper.prepend(cardEl);
-// }
+function handleImageClick(name, link) {
+    imagePopup.open(name, link);
+}
+
+function renderCard(cardData, wrapper) {
+  const cardEl = createCard(cardData);
+  wrapper.prepend(cardEl);
+}
 
 // initialCards.forEach((cardData) => {
 //   renderCard(cardData, cardsWrap);
@@ -154,10 +165,6 @@ function createCard(cardData) {
 /* -------------------------------------------------------------------------- */
 /*                            Image Preview Handler                           */
 /* -------------------------------------------------------------------------- */
-
-function handleImageClick(name, link) {
-  imagePopup.open(name, link);
-}
 
 // function openModal(modal) {
 //   modal.classList.add("modal_opened");
