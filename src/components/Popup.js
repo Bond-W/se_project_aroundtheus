@@ -2,6 +2,7 @@ export default class Popup {
   constructor(popupSelector) {
     this._popupElement = document.querySelector(popupSelector);
     this._handleEscClose = this._handleEscClose.bind(this);
+  
   }
 
   open() {
@@ -13,6 +14,23 @@ export default class Popup {
     this._popupElement.classList.remove("modal_opened");
     document.removeEventListener("keydown", this._handleEscClose);
   }
+
+//   _openDeleteConfirmationModal(cardElement, deleteCardHandler) {
+//     deleteCardModal.classList.add('modal_opened');
+  
+//     confirmDeleteButton.onclick = function (event) {
+//       event.preventDefault();
+//       deleteCardHandler(cardElement);
+//       modalCloseConfirmationModal();
+//     };
+//   }
+  
+//  _closeDeleteConfirmationModal() {
+//     deleteCardModal.classList.remove('modal_opened');
+//   }
+  
+  // modalCloseDeleteButton.addEventListener('click', closeDeleteConfirmationModal);
+  
 
   _handleEscClose(event) {
     if (event.key === "Escape") {

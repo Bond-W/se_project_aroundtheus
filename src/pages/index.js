@@ -6,6 +6,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import { initialCards, settings } from "../utils/constants.js";
 import Section from "../components/Section.js";
+import Api from "../components/Api.js";
 
 /* -------------------------------------------------------------------------- */
 /*                           Enable Form Validation                           */
@@ -110,5 +111,122 @@ function handleImageClick(name, link) {
     imagePopup.open(name, link);
 }
 
+const avatarEditButton = document.querySelector('.profile__image-edit-button');
+const editAvatarModal = document.querySelector('#edit-avatar-modal');
+
+function openAvatarModal() {
+  editAvatarModal.classList.add('modal_opened');
+}
+
+function closeAvatarModal() {
+  editAvatarModal.classList.remove('modal_opened');
+}
+
+avatarEditButton.addEventListener('click', openAvatarModal);
+
+document.querySelector('#avatar-edit-modal-close-button').addEventListener('click', closeAvatarModal);
+
+document.querySelector('#edit-avatar-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const avatarUrlInput = document.querySelector('#avatar-url').value;
+
+  document.querySelector('.profile__image').src = avatarUrlInput;
+
+  closeAvatarModal();
+});
 
 
+const deleteCardModal = document.querySelector('#delete-card-modal');
+const modalCloseDeleteButton = document.querySelector('#modal-close-delete-button');
+const confirmDeleteButton = deleteCardModal.querySelector('#modal-delete-button');
+const deleteButtons = document.querySelectorAll('.card__delete-button');
+
+console.log(deleteCardModal, modalCloseDeleteButton, confirmDeleteButton, deleteButtons);
+
+let cardToDelete = null;
+
+function openDeleteConfirmationModal(cardEl) {
+  console.log('Opening modal for card:', cardEl);  
+  deleteCardModal.classList.add('modal_opened');
+  cardToDelete = cardEl;
+}
+
+function closeDeleteConfirmationModal() {
+  console.log('Closing modal');
+  deleteCardModal.classList.remove('modal_opened');
+  cardToDelete = null;
+}
+
+modalCloseDeleteButton.addEventListener('click', closeDeleteConfirmationModal);
+
+confirmDeleteButton.addEventListener('click', () => {
+  console.log('Confirm delete clicked');
+  if (cardToDelete) {
+    console.log('Deleting card:', cardToDelete);
+    cardToDelete.remove();
+    cardToDelete = null;
+  }
+  closeDeleteConfirmationModal();
+});
+
+deleteButtons.forEach((button) => {
+  button.addEventListener('click', (event) => {
+    const cardElement = event.target.closest('.card');
+    openDeleteConfirmationModal(cardElement);
+  });
+});
+
+const profileForm = document.querySelector('#edit-profile-form');
+const submitButton = profileForm.querySelector('.modal__button');
+
+function saveProfileFormSubmit(formData) {
+  submitButton.textContent = 'Saving...';
+
+  Api.updateUserInfo(formData)
+    .then(() => {
+      console.log('Profile updated successfully');
+      submitButton.textContent = 'Save';
+    })
+    .catch((error) => {
+      console.error('Error updating profile:', error);
+      submitButton.textContent = 'Save';
+    });
+}
+
+profileForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const formData = {
+    name: document.querySelector('#profile-name').value,
+    description: document.querySelector('#profile-description').value,
+  };
+
+  saveProfileFormSubmit(formData);
+});
+
+
+const avatarForm = document.querySelector('#edit-avatar-form');
+const avatarImage = document.querySelector('#profile-avatar');
+const avatarSubmitButton = avatarForm.querySelector('.modal__button');
+
+function handleAvatarFormSubmit(formData) {
+  avatarSubmitButton.textContent = 'Saving...';
+  Api.updateUserAvatar(formData.avatarUrl)
+  .then(() => {
+    avatarImage.src = formData.avatarUrl;
+    avatarSubmitButton.textContent = 'Save';  
+  })
+  .catch((error) => {
+    console.error('Error updating avatar:', error);
+    avatarSubmitButton.textContent = 'Save';
+  });
+}
+
+avatarForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const formData = {
+    avatarUrl: document.querySelector('#avatar-url').value,
+  };
+  handleAvatarFormSubmit(formData);
+});

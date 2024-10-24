@@ -1,3 +1,5 @@
+// import { openDeleteConfirmationModal } from './PopupWithForm'
+
 export default class Card {
   constructor({ name, link }, cardSelector, handleImageClick) {
     this._name = name;
@@ -14,6 +16,8 @@ export default class Card {
     return cardElement;
   }
 
+  
+
   _setEventListeners() {
     this._cardEl
       .querySelector(".card__like-button")
@@ -21,11 +25,12 @@ export default class Card {
         this._handleLikeIcon();
       });
 
-    this._cardEl
-      .querySelector(".card__delete-button")
-      .addEventListener("click", () => {
-        this._handleDeleteCard();
-      });
+    // this._cardEl
+    //   .querySelector(".card__delete-button")
+    //   .addEventListener("click", () => {
+    //     this._handleDeleteCard();
+    //   });
+    
 
       this._cardImageElement.addEventListener("click", () => {
         if (this._handleImageClick) {

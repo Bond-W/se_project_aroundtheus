@@ -84,6 +84,37 @@
   margin-right: 25px;
 }
 
+.profile__avatar-container {
+  position: relative;
+  display: inline-block;
+}
+
+.profile__image-edit-button {
+  position: absolute;
+  top: 50%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: none;
+  cursor: pointer;
+  background: url("../images/Pencil\ Icon.svg") center no-repeat;
+  background-size: 26px 26px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.profile__avatar-container:hover .profile__image-edit-button {
+  display: block;
+}
+
+.profile__avatar-container:hover .profile__image {
+  opacity: 0.2;
+  transition: opacity 0.3s ease-in-out;
+}
+
 @media screen and (max-width: 700px) {
   .profile__edit-button {
     margin: 0 10px 0 10px;
