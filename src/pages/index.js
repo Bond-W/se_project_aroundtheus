@@ -75,9 +75,18 @@ document.querySelector("#add-button").addEventListener("click", () => {
 
 
 function handleProfileFormSubmit(formData) {
-  userInfo.setUserInfo({
+  api.updateUserInfo({
     name: formData.name,
     job: formData.description,
+  })
+  .then((userData) => {
+    userInfo.setUserInfo({
+      name: userData.name,
+      job: userData.about,
+    });
+  })
+  .catch((err) => {
+    console.error("Error updating profile", err);
   });
 }
 
@@ -104,7 +113,7 @@ const cardSection = new Section(
 cardSection.renderItems();
 
 function createCard(cardData) {
-  return new Card(cardData, "#card-template", handleImageClick).generateCard();
+  return new Card(cardData, "#card-template", handleImageClick, openDeleteConfirmationModal).generateCard();
 }
 
 function handleImageClick(name, link) {
@@ -142,39 +151,30 @@ const modalCloseDeleteButton = document.querySelector('#modal-close-delete-butto
 const confirmDeleteButton = deleteCardModal.querySelector('#modal-delete-button');
 const deleteButtons = document.querySelectorAll('.card__delete-button');
 
-console.log(deleteCardModal, modalCloseDeleteButton, confirmDeleteButton, deleteButtons);
-
 let cardToDelete = null;
 
-function openDeleteConfirmationModal(cardEl) {
-  console.log('Opening modal for card:', cardEl);  
-  deleteCardModal.classList.add('modal_opened');
-  cardToDelete = cardEl;
+function openDeleteConfirmationModal(card) { 
+  console.log("Opening delete modal for card:", card);
+  cardToDelete = card;
+  deleteCardModal.classList.add("modal_opened");
 }
 
-function closeDeleteConfirmationModal() {
-  console.log('Closing modal');
-  deleteCardModal.classList.remove('modal_opened');
-  cardToDelete = null;
-}
+function confirmDelete() {
+  console.log("Deleting card instance:", cardToDelete);
 
-modalCloseDeleteButton.addEventListener('click', closeDeleteConfirmationModal);
-
-confirmDeleteButton.addEventListener('click', () => {
-  console.log('Confirm delete clicked');
-  if (cardToDelete) {
-    console.log('Deleting card:', cardToDelete);
-    cardToDelete.remove();
-    cardToDelete = null;
+  if (cardToDelete && typeof cardToDelete.handleDeleteCard === "function") {
+      cardToDelete.handleDeleteCard();
+      cardToDelete = null;
+  } else {
+      console.error("handleDeleteCard is not a function on", cardToDelete);
   }
-  closeDeleteConfirmationModal();
-});
 
-deleteButtons.forEach((button) => {
-  button.addEventListener('click', (event) => {
-    const cardElement = event.target.closest('.card');
-    openDeleteConfirmationModal(cardElement);
-  });
+  deleteCardModal.classList.remove("modal_opened");
+}
+
+confirmDeleteButton.addEventListener("click", confirmDelete);
+modalCloseDeleteButton.addEventListener("click", () => {
+  deleteCardModal.classList.remove("modal_opened");
 });
 
 const profileForm = document.querySelector('#edit-profile-form');
@@ -206,15 +206,21 @@ profileForm.addEventListener('submit', (event) => {
 });
 
 
+const avatarImage = document.querySelector('.profile__image');
 const avatarForm = document.querySelector('#edit-avatar-form');
-const avatarImage = document.querySelector('#profile-avatar');
 const avatarSubmitButton = avatarForm.querySelector('.modal__button');
 
 function handleAvatarFormSubmit(formData) {
   avatarSubmitButton.textContent = 'Saving...';
-  Api.updateUserAvatar(formData.avatarUrl)
-  .then(() => {
-    avatarImage.src = formData.avatarUrl;
+
+  api.updateUserAvatar(formData.avatarUrl)
+  .then((userData) => {
+    console.log("Updated user data received:", userData);
+    if(avatarImage) {
+      avatarImage.src = userData.avatar;
+    } else {
+      console.error("avatarImage element not found in the DOM");
+    }
     avatarSubmitButton.textContent = 'Save';  
   })
   .catch((error) => {
@@ -230,3 +236,44 @@ avatarForm.addEventListener('submit', (event) => {
   };
   handleAvatarFormSubmit(formData);
 });
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+      authorization: "19ef03f7-30e6-4001-8bf7-8913888ed1f1",
+      "Content-Type": "application/json",
+  },
+});
+
+function loadUserProfile() {
+  api.getUserInfo()
+  .then((userData) => {
+    userInfo.setUserInfo({
+      name: userData.name,
+      job: userData.about,
+    });
+    avatarImage.src = userData.avatar;
+  })
+  .catch((error) => {
+    console.error("Error loading user profile:", error);
+  });
+}
+
+function loadInitialCards() {
+  api.getInitialCards()
+  .then((cards) => {
+    cards.forEach((cardData) => {
+      const card = createCard(cardData);
+      cardSection.addItem(card);
+    });
+  })
+  .catch((error) => {
+    console.error("Error loading initial cards:", error);
+  });
+}
+
+loadUserProfile();
+loadInitialCards();
+
+deleteCardModal.setEventListeners();
+editAvatarModal.setEventListeners();
