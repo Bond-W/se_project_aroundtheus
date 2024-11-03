@@ -4,20 +4,19 @@ export default class Api {
         this._headers = headers;
     }
 
+    _handleResponse(res) {
+        if(res.ok) {
+            return res.json();
+        }
+        return Promise.reject(`Error: ${res.status}`);
+    }
+
     getInitialCards() {
         return fetch(`${this._baseUrl}/cards`, {
             method: "GET",
             headers: this._headers,
         })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Error: ${res.status}`);
-        })
-        .catch((err) => {
-            console.error(err);
-        });
+        .then(this._handleResponse);
     }
 
     getUserInfo() {
@@ -25,15 +24,7 @@ export default class Api {
             method: "GET",
             headers: this._headers,
         })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Error: ${res.status}`);
-        })
-        .catch((err) => {
-            console.error(err);
-        });
+        .then(this._handleResponse);
     }
 
     updateUserInfo(data) {
@@ -45,15 +36,7 @@ export default class Api {
                 about: data.job,
             }),
         })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Error: ${res.status}`);
-        })
-        .catch((err) => {
-            console.error(err);
-        });
+        .then(this._handleResponse);
     }
 
     addCard(data) {
@@ -65,15 +48,7 @@ export default class Api {
                 link: data.url,
             }),
         })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Error: ${res.status}`);
-        })
-        .catch((err) => {
-            console.error(err);
-        });
+        .then(this._handleResponse);
     }
 
     deleteCard(cardId) {
@@ -81,14 +56,9 @@ export default class Api {
             method: "DELETE",
             headers: this._headers,
         })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Error: ${res.status}`);
-        })
+        .then(this._handleResponse)
         .catch((err) => {
-            console.error(err);
+            console.error("Delete Card Error:", err);
         });
     }
 
@@ -97,15 +67,7 @@ export default class Api {
             method: "PUT",
             headers: this._headers,
         })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Error: ${res.status}`);
-        })
-        .catch((err) => {
-            console.error(err);
-        });
+        .then(this._handleResponse);
     }
 
     unlikeCard(cardId) {
@@ -113,15 +75,7 @@ export default class Api {
             method: "DELETE",
             headers: this._headers,
         })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Error: ${res.status}`);
-        })
-        .catch((err) => {
-            console.error(err);
-        });
+        .then(this._handleResponse);
     }
 
     updateUserAvatar(avatarUrl) {
@@ -132,15 +86,7 @@ export default class Api {
                 avatar: avatarUrl,
             }),
         })
-        .then((res) => {
-            if(res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Error: ${res.status}`);
-        })
-        .catch ((err) => {
-            console.error(err);
-        });
+        .then(this._handleResponse);
     }
 }
 
