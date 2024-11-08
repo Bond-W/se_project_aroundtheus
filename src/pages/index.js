@@ -94,11 +94,9 @@ function loadInitialCards() {
       console.error("Error loading initial cards:", error);
     });
 }
-  
   loadInitialCards();
   
   function createCard(cardData) {
-    console.log("Creating card with ID:", cardData);
     return new Card(
         {
             name: cardData.name,
@@ -161,18 +159,30 @@ function handleProfileFormSubmit(formData) {
   }
   
   function handleAddCardFormSubmit(formData) {
-    api.addCard({
+    const cardData = {
       title: formData.title,
       url: formData.url
-    })
-    .then((cardData) => {
-      const card = createCard(cardData);
-      cardSection.addItem(card);
-    })
-    .catch((error) => {
-      console.error("Error Adding Card:", error);
-    });
-  }
+    };
+
+    api.addCard(cardData)
+      .then((savedCardData) => {
+        console.log("Card saved to server:", savedCardData);
+
+        if (savedCardData && savedCardData._id) {
+          const card = createCard({
+            name: savedCardData.name,
+            link: savedCardData.link,
+            _id: savedCardData._id
+          });
+          cardSection.addItem(card);
+        } else {
+          console.error("Card data missing _id:", savedCardData);
+        }
+      })
+      .catch((error) => {
+        console.error("Error adding card:", error);
+      });
+}
   
   function handleDeleteCard(card) {
     if (card._id) {
@@ -196,26 +206,39 @@ function handleProfileFormSubmit(formData) {
   function handleAvatarFormSubmit(formData) {
     avatarSubmitButton.textContent = "Saving...";
     
-    console.log("Submitting avatar URL:", formData.avatarUrl);
-  
-    api.updateUserAvatar(formData.avatarUrl)
-      .then((userData) => {
-        console.log("API Response for Avatar Update:", userData);
-        
-        if (userData && userData.avatar) {
-          avatarImage.src = userData.avatar;
-          console.log("Avatar updated successfully:", userData.avatar);
-        } else {
-          console.error("Avatar URL missing in response");
-        }
-        
+    const avatarUrl = formData.avatarUrl;
+    
+    console.log("Form Data Received:", formData);
+    console.log("Avatar URL Received:", avatarUrl);
+
+    if (!avatarUrl || avatarUrl.trim() === "") {
+        console.error("Please enter a valid URL for your avatar.");
+        alert("Please enter a valid URL for your avatar.");
         avatarSubmitButton.textContent = "Save";
-      })
-      .catch((error) => {
-        console.error("Error updating avatar:", error);
-        avatarSubmitButton.textContent = "Save";
-      });
-  }
+        return;
+    }
+
+    console.log("Submitting avatar URL:", avatarUrl);
+
+    api.updateUserAvatar(avatarUrl)
+        .then((userData) => {
+            console.log("API Response for Avatar Update:", userData);
+            
+            if (userData && userData.avatar) {
+                avatarImage.src = userData.avatar;
+                console.log("Avatar updated successfully:", userData.avatar);
+            } else {
+                console.error("Avatar URL missing in response");
+            }
+        })
+        .catch((error) => {
+            console.error("Error updating avatar:", error);
+            alert("Error updating avatar. Please try again.");
+        })
+        .finally(() => {
+            avatarSubmitButton.textContent = "Save";
+        });
+}
   
   /* -------------------------------------------------------------------------- */
   /*                            Set Button Listeners                            */
