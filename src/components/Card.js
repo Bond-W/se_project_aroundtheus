@@ -1,15 +1,16 @@
 // import { openDeleteConfirmationModal } from './PopupWithForm'
 
 export default class Card {
-  constructor({ name, link, id }, cardSelector, handleImageClick, handleDeleteCard) {
+  constructor({ name, link, id }, cardSelector, handleImageClick, handleDeleteCard, handleLikeIcon) {
     this._name = name;
     this._link = link;
     this._id = id;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
     this._handleDeleteCard = handleDeleteCard;
+    this._handleLikeIcon = handleLikeIcon;
   }
-  
+
   handleDeleteCard() {
     if (this._cardEl) {
       this._cardEl.remove();
@@ -26,21 +27,28 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._cardEl.querySelector(".card__like-button")
-      .addEventListener("click", () => this._handleLikeIcon());
+    const likeButton = this._cardEl.querySelector(".card__like-button");
+    const deleteButton = this._cardEl.querySelector(".card__delete-button");
+
+    if (likeButton) {
+      likeButton.addEventListener("click", () => {
+        this._handleLikeIcon(this);
+      });
+    }
   
-    this._cardEl.querySelector(".card__delete-button")
-      .addEventListener("click", () => {
-        console.log("Delete button clicked for card ID:", this._id);
+    if (deleteButton) {
+      deleteButton.addEventListener("click", () => {
         this._handleDeleteCard(this);
       });
-    
+    }
 
+    if (this._cardImageElement) {
       this._cardImageElement.addEventListener("click", () => {
         if (this._handleImageClick) {
           this._handleImageClick(this._name, this._link);
         }
       });
+    }
   }
   
   generateCard() {
@@ -54,9 +62,14 @@ export default class Card {
     return this._cardEl;
   }
   
-  _handleLikeIcon() {
-    this._cardEl
-      .querySelector(".card__like-button")
-      .classList.toggle("card__like-button_active");
+
+  toggleLikeIcon() {
+    this._cardEl.querySelector(".card__like-button").classList.toggle("card__like-button_active");
   }
+
+//   _handleLikeIcon() {
+//     this._cardEl
+//       .querySelector(".card__like-button")
+//       .classList.toggle("card__like-button_active");
+//   }
 }

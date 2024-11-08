@@ -79,20 +79,24 @@ export default class Api {
     }
 
     likeCard(cardId) {
+        console.log("Liking card with ID:", cardId);
         return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-            method: "PUT",
-            headers: this._headers,
+          method: "PUT",
+          headers: this._headers,
         })
-        .then(this._handleResponse);
-    }
-
-    unlikeCard(cardId) {
+        .then(this._handleResponse)
+        .catch((err) => console.error("Error liking card:", err));
+      }
+      
+      unlikeCard(cardId) {
+        console.log("Unliking card with ID:", cardId);
         return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-            method: "DELETE",
-            headers: this._headers,
+          method: "DELETE",
+          headers: this._headers,
         })
-        .then(this._handleResponse);
-    }
+        .then(this._handleResponse)
+        .catch((err) => console.error("Error unliking card:", err));
+      }
 
     updateUserAvatar(avatarUrl) {
         console.log("Sending request to update avatar:", avatarUrl);
