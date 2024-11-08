@@ -13,6 +13,7 @@ import PopupWithConfirm from "../components/PopupWithConfirm.js";
 /*                           Enable Form Validation                           */
 /* -------------------------------------------------------------------------- */
 const avatarImage = document.querySelector(".profile__image");
+console.log("Avatae Image Element:", avatarImage);
 const avatarEditButton = document.querySelector(".profile__image-edit-button");
 const nameInput = document.querySelector("#profile-name");
 const jobInput = document.querySelector("#profile-description");
@@ -86,7 +87,7 @@ const cardSection = new Section(
 function loadInitialCards() {
   api.getInitialCards()
     .then((cards) => {
-      console.log("Fetched cards:", cards); // Check API data structure
+      console.log("Fetched cards:", cards);
       cardSection.renderItems(cards);
     })
     .catch((error) => {
@@ -97,7 +98,7 @@ function loadInitialCards() {
   loadInitialCards();
   
   function createCard(cardData) {
-    console.log("Creating card with ID:", cardData._id);
+    console.log("Creating card with ID:", cardData);
     return new Card(
         {
             name: cardData.name,
@@ -174,11 +175,12 @@ function handleProfileFormSubmit(formData) {
   }
   
   function handleDeleteCard(card) {
-    console.log("Deleting card with ID:", card._id);
     if (card._id) {
+      console.log("Deleting card with ID:", card._id);
       deleteConfirm.setSubmitFunction(() => {
         api.deleteCard(card._id)
           .then(() => {
+            console.log("Card deleted successfully:", card._id);
             card.handleDeleteCard();
           })
           .catch((error) => {
@@ -187,30 +189,34 @@ function handleProfileFormSubmit(formData) {
       });
       deleteConfirm.open();
     } else {
-      console.error("Card ID is missing");
+      console.error("Card ID is missing:", card);
     }
   }
         
-        function handleAvatarFormSubmit(formData) {
-          avatarSubmitButton.textContent = "Saving...";
+  function handleAvatarFormSubmit(formData) {
+    avatarSubmitButton.textContent = "Saving...";
+    
+    console.log("Submitting avatar URL:", formData.avatarUrl);
+  
+    api.updateUserAvatar(formData.avatarUrl)
+      .then((userData) => {
+        console.log("API Response for Avatar Update:", userData);
         
-          api
-          .updateUserAvatar(formData.avatarUrl)
-          .then((userData) => {
-            console.log("Updated user data received:", userData);
-            if (avatarImage) {
-              avatarImage.src = userData.avatar;
-            } else {
-              console.error("avatarImage element not found in the DOM");
-            }
-            avatarSubmitButton.textContent = "Save";
-          })
-          .catch((error) => {
-            console.error("Error updating avatar:", error);
-            avatarSubmitButton.textContent = "Save";
-          });
+        if (userData && userData.avatar) {
+          avatarImage.src = userData.avatar;
+          console.log("Avatar updated successfully:", userData.avatar);
+        } else {
+          console.error("Avatar URL missing in response");
         }
-
+        
+        avatarSubmitButton.textContent = "Save";
+      })
+      .catch((error) => {
+        console.error("Error updating avatar:", error);
+        avatarSubmitButton.textContent = "Save";
+      });
+  }
+  
   /* -------------------------------------------------------------------------- */
   /*                            Set Button Listeners                            */
   /* -------------------------------------------------------------------------- */
@@ -234,7 +240,19 @@ function handleProfileFormSubmit(formData) {
   /*                               Avatar Handling                              */
   /* -------------------------------------------------------------------------- */
   
-  
+  avatarForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const avatarUrlInput = document.querySelector("#avatar-url").value.trim();
+
+  if (!avatarUrlInput) {
+    console.error("Avatar URL is empty");
+    alert("Please enter a valid URL for your avatar.");
+    return;
+  }
+
+  console.log("Avatar form submitted with URL:", avatarUrlInput);
+  handleAvatarFormSubmit({ avatarUrl: avatarUrlInput });
+});
   
   
  { // avatarForm.addEventListener("submit", (event) => {

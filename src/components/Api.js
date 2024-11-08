@@ -79,14 +79,17 @@ export default class Api {
     }
 
     updateUserAvatar(avatarUrl) {
+        console.log("Sending request to update avatar:", avatarUrl);
+      
         return fetch(`${this._baseUrl}/users/me/avatar`, {
-            method: "PATCH",
-            headers: this._headers,
-            body: JSON.stringify({
-                avatar: avatarUrl,
-            }),
+          method: "PATCH",
+          headers: this._headers,
+          body: JSON.stringify({ avatar: avatarUrl }),
         })
-        .then(this._handleResponse);
-    }
+          .then(this._handleResponse)
+          .catch((err) => {
+            console.error("Failed to update avatar:", err);
+          });
+      }
 }
 

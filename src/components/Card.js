@@ -26,15 +26,14 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._cardEl
-      .querySelector(".card__like-button")
+    this._cardEl.querySelector(".card__like-button")
       .addEventListener("click", () => this._handleLikeIcon());
-
-    this._cardEl
-      .querySelector(".card__delete-button")
+  
+    this._cardEl.querySelector(".card__delete-button")
       .addEventListener("click", () => {
-         this._handleDeleteCard(this);
-    });
+        console.log("Delete button clicked for card ID:", this._id);
+        this._handleDeleteCard(this);
+      });
     
 
       this._cardImageElement.addEventListener("click", () => {
