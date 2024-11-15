@@ -5,11 +5,15 @@ export default class Api {
     }
 
     _handleResponse(res) {
-        if(res.ok) {
-            return res.json();
+        if (res.ok) {
+          return res.json().catch((err) => {
+            console.error("Error parsing JSON:", err);
+            return Promise.reject("Failed to parse JSON response");
+          });
         }
         return Promise.reject(`Error: ${res.status}`);
-    }
+      }
+
 
     getInitialCards() {
         return fetch(`${this._baseUrl}/cards`, {
@@ -79,23 +83,28 @@ export default class Api {
     }
 
     likeCard(cardId) {
-        console.log("Liking card with ID:", cardId);
-        return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+        return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
           method: "PUT",
           headers: this._headers,
         })
-        .then(this._handleResponse)
-        .catch((err) => console.error("Error liking card:", err));
+          .then(this._handleResponse)
+          .catch((err) => {
+            console.error("Error liking card:", err);
+            return Promise.reject(err);
+          });
       }
       
+      
       unlikeCard(cardId) {
-        console.log("Unliking card with ID:", cardId);
-        return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+        return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
           method: "DELETE",
           headers: this._headers,
         })
-        .then(this._handleResponse)
-        .catch((err) => console.error("Error unliking card:", err));
+          .then(this._handleResponse)
+          .catch((err) => {
+            console.error("Error unliking card:", err);
+            return Promise.reject(err);
+          });
       }
 
     updateUserAvatar(avatarUrl) {
@@ -107,8 +116,18 @@ export default class Api {
           body: JSON.stringify({ avatar: avatarUrl }),
         })
           .then(this._handleResponse)
+          .then((userData) => {
+            if (userData && userData.avatar) {
+              console.log("Avatar updated successfully:", userData.avatar);
+              return userData;
+            } else {
+              console.error("Avatar URL missing in response");
+              return Promise.reject("Avatar URL missing in response");
+            }
+          })
           .catch((err) => {
             console.error("Failed to update avatar:", err);
+            return Promise.reject(err);
           });
       }
 }

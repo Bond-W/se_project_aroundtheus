@@ -53,6 +53,7 @@ export default class Card {
   
   generateCard() {
     this._cardEl = this._getTemplate();
+    this._cardEl.setAttribute('data-id', this._id);
     this._cardEl.querySelector(".card__name").textContent = this._name;
     this._cardImageElement = this._cardEl.querySelector(".card__image");
     this._cardImageElement.src = this._link;
@@ -62,6 +63,15 @@ export default class Card {
     return this._cardEl;
   }
   
+
+  // generateCard() {
+  //   this._cardEl = this._getTemplate();
+  //   this._cardEl.setAttribute('data-id', this._id);
+  //   this._cardImageElement.src = this._link;
+  //   this._cardImageElement.alt = this._name;
+  //   this._setEventListeners();
+  //   return this._cardEl;
+  // }
 
   toggleLikeIcon() {
     this._cardEl.querySelector(".card__like-button").classList.toggle("card__like-button_active");
