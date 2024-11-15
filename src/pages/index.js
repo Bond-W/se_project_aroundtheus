@@ -146,6 +146,9 @@ function handleImageClick(name, link) {
 }
 
 function handleProfileFormSubmit(formData) {
+  const profileFormSubmitButton = document.querySelector("#add-button");
+    updateButtonState(profileFormSubmitButton, true);
+
   api
     .updateUserInfo({
       name: formData.name,
@@ -159,6 +162,9 @@ function handleProfileFormSubmit(formData) {
     })
     .catch((err) => {
       console.error("Error updating profile", err);
+    })
+    .finally(() => {
+      updateButtonState(profileFormSubmitButton, false);
     });
   }
   
@@ -167,6 +173,8 @@ function handleProfileFormSubmit(formData) {
       title: formData.title,
       url: formData.url
     };
+    const addCardSubmitButton = document.querySelector("#add-card-submit-button");
+    updateButtonState(addCardSubmitButton, true);
 
     api.addCard(cardData)
       .then((savedCardData) => {
@@ -185,6 +193,9 @@ function handleProfileFormSubmit(formData) {
       })
       .catch((error) => {
         console.error("Error adding card:", error);
+      })
+      .finally(() => {
+        updateButtonState(addCardSubmitButton, false);
       });
 }
   
@@ -283,24 +294,19 @@ function handleLikeIcon(card) {
   });
   
   /* -------------------------------------------------------------------------- */
-  /*                               Avatar Handling                              */
+  /*                                                                            */
   /* -------------------------------------------------------------------------- */
   
-  avatarForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const avatarUrlInput = document.querySelector("#avatar-url").value.trim();
-
-  if (!avatarUrlInput) {
-    console.error("Avatar URL is empty");
-    alert("Please enter a valid URL for your avatar.");
-    return;
+function updateButtonState(button, isLoading) {
+  if (isLoading) {
+    button.textContent = "Saving...";
+    button.disabled = true;
+  } else {
+    button.textContent = "Save";
+    button.disabled = false;
   }
+}
 
-  console.log("Avatar form submitted with URL:", avatarUrlInput);
-  handleAvatarFormSubmit({ avatarUrl: avatarUrlInput });
-});
-  
-  
  { // avatarForm.addEventListener("submit", (event) => {
   //   event.preventDefault();
   //   const formData = {
@@ -313,7 +319,6 @@ function handleLikeIcon(card) {
   
   // const previewCardModal = document.querySelector("#preview-card-modal");
   
-
 
 
 
