@@ -13,7 +13,7 @@ import PopupWithConfirm from "../components/PopupWithConfirm.js";
 /*                           Enable Form Validation                           */
 /* -------------------------------------------------------------------------- */
 const avatarImage = document.querySelector(".profile__image");
-console.log("Avatae Image Element:", avatarImage);
+console.log("Avatar Image Element:", avatarImage);
 const avatarEditButton = document.querySelector(".profile__image-edit-button");
 const nameInput = document.querySelector("#profile-name");
 const jobInput = document.querySelector("#profile-description");
@@ -105,6 +105,7 @@ function loadInitialCards() {
         name: cardData.name,
         link: cardData.link,
         id: cardData._id,
+        isLiked: cardData.isLiked
       },
       "#card-template",
       handleImageClick,
@@ -146,7 +147,7 @@ function handleImageClick(name, link) {
 }
 
 function handleProfileFormSubmit(formData) {
-  const profileFormSubmitButton = document.querySelector("#add-button");
+  const profileFormSubmitButton = document.querySelector("#profile-edit-submit-button");
     updateButtonState(profileFormSubmitButton, true);
 
   api
@@ -164,7 +165,11 @@ function handleProfileFormSubmit(formData) {
       console.error("Error updating profile", err);
     })
     .finally(() => {
+      setTimeout(() => {
       updateButtonState(profileFormSubmitButton, false);
+      
+        profileFormPopup.close();
+      }, 500);
     });
   }
   
@@ -195,7 +200,11 @@ function handleProfileFormSubmit(formData) {
         console.error("Error adding card:", error);
       })
       .finally(() => {
-        updateButtonState(addCardSubmitButton, false);
+        setTimeout(() => {
+        updateButtonState(addCardSubmitButton, false, "Create");
+        
+          addCardFormPopup.close();
+        }, 500);
       });
 }
   
@@ -219,21 +228,9 @@ function handleProfileFormSubmit(formData) {
   }
         
   function handleAvatarFormSubmit(formData) {
-    avatarSubmitButton.textContent = "Saving...";
-    
+    const avatarFormSubmitButton = document.querySelector("#avatar-submit-button");
+    updateButtonState(avatarFormSubmitButton, true);
     const avatarUrl = formData.avatarUrl;
-    
-    console.log("Form Data Received:", formData);
-    console.log("Avatar URL Received:", avatarUrl);
-
-    if (!avatarUrl || avatarUrl.trim() === "") {
-        console.error("Please enter a valid URL for your avatar.");
-        alert("Please enter a valid URL for your avatar.");
-        avatarSubmitButton.textContent = "Save";
-        return;
-    }
-
-    console.log("Submitting avatar URL:", avatarUrl);
 
     api.updateUserAvatar(avatarUrl)
         .then((userData) => {
@@ -251,7 +248,11 @@ function handleProfileFormSubmit(formData) {
             alert("Error updating avatar. Please try again.");
         })
         .finally(() => {
-            avatarSubmitButton.textContent = "Save";
+          setTimeout(() => {
+            updateButtonState(avatarFormSubmitButton, false);
+            
+              avatarPopup.close();
+            }, 500);
         });
 }
   
@@ -297,12 +298,12 @@ function handleLikeIcon(card) {
   /*                                                                            */
   /* -------------------------------------------------------------------------- */
   
-function updateButtonState(button, isLoading) {
+function updateButtonState(button, isLoading, defaultText = "Save") {
   if (isLoading) {
     button.textContent = "Saving...";
     button.disabled = true;
   } else {
-    button.textContent = "Save";
+    button.textContent = defaultText;
     button.disabled = false;
   }
 }

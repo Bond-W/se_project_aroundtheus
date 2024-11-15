@@ -15,23 +15,6 @@ export default class Popup {
     document.removeEventListener("keydown", this._handleEscClose);
   }
 
-//   _openDeleteConfirmationModal(cardElement, deleteCardHandler) {
-//     deleteCardModal.classList.add('modal_opened');
-  
-//     confirmDeleteButton.onclick = function (event) {
-//       event.preventDefault();
-//       deleteCardHandler(cardElement);
-//       modalCloseConfirmationModal();
-//     };
-//   }
-  
-//  _closeDeleteConfirmationModal() {
-//     deleteCardModal.classList.remove('modal_opened');
-//   }
-  
-  // modalCloseDeleteButton.addEventListener('click', closeDeleteConfirmationModal);
-  
-
   _handleEscClose(event) {
     if (event.key === "Escape") {
       this.close();

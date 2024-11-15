@@ -28,7 +28,6 @@ export default class PopupWithForm extends Popup {
         console.log("Form Data on Submit:", formData);
         this._handleFormSubmit(formData);
         this._popupForm.reset();
-        this.close();
     });
 }
 
