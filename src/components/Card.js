@@ -1,5 +1,3 @@
-// import { openDeleteConfirmationModal } from './PopupWithForm'
-
 export default class Card {
   constructor({ name, link, id, isLiked }, cardSelector, handleImageClick, handleDeleteCard, handleLikeIcon) {
     this._name = name;
@@ -12,11 +10,26 @@ export default class Card {
     this._handleLikeIcon = handleLikeIcon;
   }
 
-  handleDeleteCard() {
-    if (this._cardEl) {
-      this._cardEl.remove();
-      this._cardEl = null;
+  get isLiked() {
+    return this._isLiked;
+  }
+
+  set isLiked(value) {
+    this._isLiked = value;
+    this._updateLikeIcon();
+  }
+
+  _updateLikeIcon() {
+    if (this._isLiked) {
+      this._likeButton.classList.add("card__like-button_active");
+    } else {
+      this._likeButton.classList.remove("card__like-button_active");
     }
+  }
+
+  toggleLike() {
+    this._isLiked = !this._isLiked;
+    this._updateLikeIcon();
   }
 
   _getTemplate() {
@@ -28,60 +41,32 @@ export default class Card {
   }
 
   _setEventListeners() {
-    const likeButton = this._cardEl.querySelector(".card__like-button");
     const deleteButton = this._cardEl.querySelector(".card__delete-button");
 
-    if (likeButton) {
-      likeButton.addEventListener("click", () => {
-        this._handleLikeIcon(this);
-      });
-    }
-  
-    if (deleteButton) {
-      deleteButton.addEventListener("click", () => {
-        this._handleDeleteCard(this);
-      });
-    }
+    this._likeButton.addEventListener("click", () => {
+      this._handleLikeIcon(this);
+    });
 
-    if (this._cardImageElement) {
-      this._cardImageElement.addEventListener("click", () => {
-        if (this._handleImageClick) {
-          this._handleImageClick(this._name, this._link);
-        }
-      });
-    }
-  }
-  
-  renderCardLike() {
-    if(this._isLiked) {
-      this._likeButton.classList.add("card__like-button_active");
-    } else {
-      this._likeButton.classList.remove("card__like-button_active");
-    }
-  }
+    deleteButton.addEventListener("click", () => {
+      this._handleDeleteCard(this);
+    });
 
-  setIsLiked(isLiked) {
-    this._isLiked = isLiked;
-    this.renderCardLike();
+    this._cardImageElement.addEventListener("click", () => {
+      this._handleImageClick(this._name, this._link);
+    });
   }
 
   generateCard() {
     this._cardEl = this._getTemplate();
-    this._cardEl.setAttribute('data-id', this._id);
-    this._cardEl.querySelector(".card__name").textContent = this._name;
-    this._cardImageElement = this._cardEl.querySelector(".card__image");
     this._likeButton = this._cardEl.querySelector(".card__like-button");
+    this._cardImageElement = this._cardEl.querySelector(".card__image");
+    this._cardEl.querySelector(".card__name").textContent = this._name;
     this._cardImageElement.src = this._link;
     this._cardImageElement.alt = this._name;
-    
+
+    this._updateLikeIcon();
     this._setEventListeners();
-    this.renderCardLike();
+
     return this._cardEl;
   }
-  
-
-  toggleLikeIcon() {
-    this._cardEl.querySelector(".card__like-button").classList.toggle("card__like-button_active");
-  }
-
 }
