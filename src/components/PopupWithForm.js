@@ -38,16 +38,6 @@ export default class PopupWithForm extends Popup {
       this.renderLoading(true);
 
       this._handleFormSubmit(formData)
-        .then(() => {
-          this._popupForm.reset();
-          this.close();
-        })
-        .catch((err) => {
-          console.error("Form submission error:", err);
-        })
-        .finally(() => {
-          this.renderLoading(false);
-        });
     });
   }
 

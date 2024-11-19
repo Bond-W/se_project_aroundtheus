@@ -10,6 +10,13 @@ export default class Card {
     this._handleLikeIcon = handleLikeIcon;
   }
 
+  handleDeleteCard() {
+    if (this._cardEl) {
+      this._cardEl.remove();
+      this._cardEl = null;
+    }
+  }
+
   get isLiked() {
     return this._isLiked;
   }

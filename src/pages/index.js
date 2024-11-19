@@ -176,6 +176,7 @@ function handleProfileFormSubmit(inputValues) {
   handleSubmit(makeRequest, profileFormPopup);
 }
 
+const cardForm = document.querySelector("#add-card-form");
 function handleAddCardFormSubmit(inputValues) {
   function makeRequest() {
     const cardData = { title: inputValues.title, url: inputValues.url };
@@ -186,6 +187,7 @@ function handleAddCardFormSubmit(inputValues) {
         _id: savedCardData._id,
       });
       cardSection.addItem(card);
+      cardForm.reset();
     });
   }
   handleSubmit(makeRequest, addCardFormPopup, "Creating...");
@@ -205,6 +207,7 @@ function handleDeleteCard(card) {
   deleteConfirm.open();
 }
 
+const avatarForm = document.querySelector("#edit-avatar-form");
 function handleAvatarFormSubmit(inputValues) {
   function makeRequest() {
     return api.updateUserAvatar(inputValues.avatarUrl).then((userData) => {
@@ -212,6 +215,7 @@ function handleAvatarFormSubmit(inputValues) {
     });
   }
   handleSubmit(makeRequest, avatarPopup);
+  avatarForm.reset();
 }
 
 function handleLikeIcon(card) {
@@ -241,12 +245,12 @@ domElements.avatarEditButton.addEventListener("click", () => avatarPopup.open())
 /* -------------------------------------------------------------------------- */
 /*                            Utility Functions                               */
 /* -------------------------------------------------------------------------- */
-function updateButtonState(button, isLoading, defaultText = "Save") {
-  if (isLoading) {
-    button.textContent = "Saving...";
-    button.disabled = true;
-  } else {
-    button.textContent = defaultText;
-    button.disabled = false;
-  }
-}
+// function updateButtonState(button, isLoading, defaultText = "Save") {
+//   if (isLoading) {
+//     button.textContent = "Saving...";
+//     button.disabled = true;
+//   } else {
+//     button.textContent = defaultText;
+//     button.disabled = false;
+//   }
+// }

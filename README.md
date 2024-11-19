@@ -1,25 +1,134 @@
-Around The U.S.
+# Around The U.S.
 
-Overview
+This project is a responsive web application showcasing user profiles and an interactive gallery of photos from beautiful locations around the U.S. Users can add, edit, delete, and like photos, as well as manage their profile information.
 
-* Intro  
-* Figma   
-* GitHub
+---
 
-Intro
+## Table of Contents
 
-In this project I used several different languages (JavaScript, HTML, and CSS) to create a functioning landing page for users to share their photos they have taken from all around the USA primarily focusing on national parks or hidden gems. All buttons are fully functional and media queries have been added so it can be enjoyed on all devices.
+* [Overview](#overview)
+* [Features](features)
+* [Demo](#demo)
+* [Getting Started](#getting-started)
+  - [Installation](#installation)
+  - [Usage](#usage)
+* [Technologies Used](#technologies-used)
+* [Project Structure](#project-structure)
+* [API Reference](#api-reference)
+* [Acknowledgments](#acknowledgments)
 
-Figma
+---
 
-[Link to the Figma](https://www.figma.com/design/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0-1&t=SO8lTDM3n8QnIZLT-0)
+## Overview
+"Around the U.S" is an interactive web application where users can:
+- View and like images in a photo gallery.
+- Add new photos to the gallery.
+- Edit their profile, including updating their name, description, and avatar.
+- Delete photos with confirmation prompts.
 
-GitHub
+The project follows modern web development practices, including modular JavaScript and reusable components. It also integrates with a backend API for data persistence and real-time updates.
 
-[Project Link](https://bond-w.github.io/se_project_aroundtheus/)
+---
 
-[Project Video](https://youtu.be/gasCAy2Ttsg)
+## Features
+- **User Profile Management:**
+  - Edit user name and bio.
+  - Update profile picture.
 
-What I Learned
+- **Photo Gallery:**
+  - View photos in an interactive, responsive grid layout.
+  - Add new photos with titles and image URLs.
+  - Like/unlike photos.
+  - Delete photos with confirmation.
 
-In this project i have learned grid functions and its properties and how flexbox and grid can be applied together. I also learned how elements are displayed correctly on popular screen sizes. 
+- **Form Validation:**
+  - Real-time validation for form inputs.
+  - Visual feedback for invalid fields.
+
+- **Responsive Design:**
+  - Fully responsive layout for seamless use on desktop and mobile devices.
+
+---
+
+## Demo
+Here's a live demo of the application: [Around the U.S. Demo](https://youtu.be/gasCAy2Ttsg)
+
+_Screenshots:_
+
+**Main Page:**
+![Main Page](#)
+
+**Edit Profile Modal:**
+![Edit Profile](#)
+
+**Add New Photo Modal:**
+![Add Photo](#)
+
+---
+
+## Getting Started
+
+### Installation
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/bond-w/around-the-us.git
+
+2. Navigate to the project directory:
+   ```bash
+   cd around-the-us
+
+3. Install the dependencies:
+   ```bash
+   npm install
+
+## Usage
+1. Start the development server:
+   ```bash
+   npm run dev
+
+2. Build the project for production:
+   ```bash
+   npm run build
+
+3. Deploy or serve the build locally:
+   ```bash
+   npm run serve
+
+---
+
+## Technologies Used
+- **HTML5** for semantic markup.
+- **CSS3** for responsive styling.
+- **JavaScript (ES6)** for application logic.
+- **Webpack** for module bundling.
+- **Babel** for transpilation.
+- **API Integration** for backend communication.
+
+---
+
+## Project Structure
+src/ ├── components/ # Reusable JavaScript components ├── images/ # Static images ├── pages/ # Main entry point (index.css, index.js) ├── utils/ # Constants and utility functions ├── index.html # Main HTML file webpack.config.js # Webpack configuration
+
+---
+
+## API Reference
+The application uses an external API for user and photo management. Below is a summary of the key endpoints:
+
+### Users
+- **Get user info:** `GET /users/me`
+- **Update user info:** `POST /cards`
+- **Update avatar:** `PATCH /users/me/avatar`
+
+### Cards (Photos)
+- **Get all cards:** `GET /cards`
+- **Add new card:** `POST /cards`
+- **Delete card:** `DELETE /cards/:id`
+- **Like a card:** `PUT /cards/:id/likes`
+- **Unlike a card:** `DELETE /cards/:id/likes`
+
+---
+
+## Acknowledgments
+- **Practicum by TripleTen** for providing project inspiration and initial resources as well as support from staff.
+- **OpenWeather** API for backend integration examples.
+
