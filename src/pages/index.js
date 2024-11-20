@@ -212,10 +212,10 @@ function handleAvatarFormSubmit(inputValues) {
   function makeRequest() {
     return api.updateUserAvatar(inputValues.avatarUrl).then((userData) => {
       userInfo.setUserInfo({ avatar: userData.avatar });
+      avatarForm.reset();
     });
   }
   handleSubmit(makeRequest, avatarPopup);
-  avatarForm.reset();
 }
 
 function handleLikeIcon(card) {
@@ -245,12 +245,3 @@ domElements.avatarEditButton.addEventListener("click", () => avatarPopup.open())
 /* -------------------------------------------------------------------------- */
 /*                            Utility Functions                               */
 /* -------------------------------------------------------------------------- */
-// function updateButtonState(button, isLoading, defaultText = "Save") {
-//   if (isLoading) {
-//     button.textContent = "Saving...";
-//     button.disabled = true;
-//   } else {
-//     button.textContent = defaultText;
-//     button.disabled = false;
-//   }
-// }

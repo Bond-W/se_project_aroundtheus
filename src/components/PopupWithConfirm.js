@@ -10,14 +10,17 @@ export default class PopupWithConfirm extends Popup {
         this._submitFunction = submitFunction;
     }
 
-    setEventListeners(){
+    setEventListeners() {
         super.setEventListeners();
         this._submitButton.addEventListener("click", (event) => {
             event.preventDefault();
             if (this._submitFunction) {
-                this._submitFunction();
+                try {
+                    this._submitFunction();
+                } catch (error) {
+                    console.error("Error executing submit function:", error);
+                }
             }
-            this.close();
         });
     }
 }
