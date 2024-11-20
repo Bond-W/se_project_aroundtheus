@@ -199,6 +199,7 @@ function handleDeleteCard(card) {
       .then(() => {
         console.log(`Card ${card._id} deleted successfully`);
         card.handleDeleteCard();
+        deleteConfirm.close();
       })
       .catch((error) => {
         console.error("Error deleting card:", error);
