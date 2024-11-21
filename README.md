@@ -56,13 +56,13 @@ Here's a live demo of the application: [Around the U.S. Demo](https://youtu.be/g
 _Screenshots:_
 
 **Main Page:**
-![Main Page](#)
+![Main Page](../se_project_aroundtheus/src/images/mainpic.png)
 
 **Edit Profile Modal:**
-![Edit Profile](#)
+![Edit Profile](../se_project_aroundtheus/src/images/editmodalpic.png)
 
 **Add New Photo Modal:**
-![Add Photo](#)
+![Add Photo](../se_project_aroundtheus/src/images/newphotopic.png)
 
 ---
 
