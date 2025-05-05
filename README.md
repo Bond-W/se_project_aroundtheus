@@ -16,6 +16,7 @@ This project is a responsive web application showcasing user profiles and an int
 * [Project Structure](#project-structure)
 * [API Reference](#api-reference)
 * [Acknowledgments](#acknowledgments)
+* [Contact Me](#contact-me)
 
 ---
 
@@ -132,3 +133,6 @@ The application uses an external API for user and photo management. Below is a s
 - **Practicum by TripleTen** for providing project inspiration and initial resources as well as support from staff.
 - **OpenWeather** API for backend integration examples.
 
+## Contact Me
+[GitHub]()
+[LinkedIn]()
